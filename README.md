@@ -24,8 +24,8 @@ TODO: Write usage instructions here
 
 ### SetUp the credentials:
 
-    VersacommerceAPI::Session.setup(api_key: "xxxx", secret: "yyyy")
-    session = VersacommerceAPI::Session.new("shopdomain.versacommerce.de", "zzzz")
+    VersacommerceAPI::Session.setup(api_key: "API_KEY_FOR_APP", secret: "SHARED_SECRET_FOR_APP")
+    session = VersacommerceAPI::Session.new("shopdomain.versacommerce.de", "RECEIVED_TOKEN")
     VersacommerceAPI::Base.activate_session(session)
 
     optional:
