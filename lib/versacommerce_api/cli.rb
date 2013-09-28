@@ -8,7 +8,7 @@ module VersacommerceAPI
     class ConfigFileError < StandardError
     end
 
-    desc "list", "list available connections"
+    desc "list", "List all saved CONNECTIONs"
     def list
       available_connections.each do |c|
         prefix = default?(c) ? " * " : "   "
@@ -16,19 +16,19 @@ module VersacommerceAPI
       end
     end
     
-    desc "add CONNECTION", "create a config file for a connection named CONNECTION"
+    desc "add [CONNECTION]", "Create a config file for a connection named CONNECTION"
     def add(connection)
       file = config_file(connection)
       if File.exist?(file)
         raise ConfigFileError, "There is already a config file at #{file}"
       else
         config = {'protocol' => 'http'}
-        config['domain']   = ask("Domain? (leave blank for #{connection}.versacommerce.de)")
+        config['domain']   = ask("Domain (leave blank for #{connection}.versacommerce.de):")
         config['domain']   = "#{connection}.versacommerce.de" if config['domain'].blank?
         config['domain']   = "#{config['domain']}.versacommerce.de" unless config['domain'].match(/[.:]/)
-        puts "\nopen http://#{config['domain']}/admin/api in your browser to get API credentials\n"
-        config['api_key']  = ask("API key?")
-        config['password'] = ask("Password?")
+        puts "\nopen http://#{config['domain']}/admin/settings/apps in your browser to get API credentials\n"
+        config['api_key']  = ask("API key :")
+        config['password'] = ask("Password:")
         create_file(file, config.to_yaml)
       end
       if available_connections.one?
@@ -36,18 +36,18 @@ module VersacommerceAPI
       end
     end
     
-    desc "remove CONNECTION", "remove the config file for CONNECTION"
+    desc "remove [CONNECTION]", "Remove the config file for CONNECTION"
     def remove(connection)
       file = config_file(connection)
       if File.exist?(file)
         remove_file(default_symlink) if default?(connection)
         remove_file(file)
       else
-        no_config_file_error(file)
+        config_file_not_found_error(file)
       end
     end
     
-    desc "edit [CONNECTION]", "open the config file for CONNECTION with your default editor"
+    desc "edit [CONNECTION]", "Open the config file for CONNECTION with your default editor"
     def edit(connection=nil)
       file = config_file(connection)
       if File.exist?(file)
@@ -57,11 +57,11 @@ module VersacommerceAPI
           puts "Please set an editor in the EDITOR environment variable"
         end
       else
-        no_config_file_error(file)
+        config_file_not_found_error(file)
       end
     end
     
-    desc "show [CONNECTION]", "output the location and contents of the CONNECTION's config file"
+    desc "show [CONNECTION]", "Show the location and contents of the CONNECTION's config file"
     def show(connection=nil)
       connection ||= default_connection
       file = config_file(connection)
@@ -69,11 +69,11 @@ module VersacommerceAPI
         puts file
         puts `cat #{file}`
       else
-        no_config_file_error(file)
+        config_file_not_found_error(file)
       end
     end
     
-    desc "default [CONNECTION]", "show the default connection, or make CONNECTION the default"
+    desc "default [CONNECTION]", "Show or set the default connection"
     def default(connection=nil)
       if connection
         target = config_file(connection)
@@ -81,7 +81,7 @@ module VersacommerceAPI
           remove_file(default_symlink)
           `ln -s #{target} #{default_symlink}`
         else
-          no_config_file_error(target)
+          config_file_not_found_error(target)
         end
       end
       if File.exist?(default_symlink)
@@ -91,12 +91,14 @@ module VersacommerceAPI
       end
     end
     
-    desc "console [CONNECTION]", "start an API console for CONNECTION"
+    desc "console [CONNECTION]", "Startup an API console for CONNECTION"
     def console(connection=nil)
       file = config_file(connection)
       
       config = YAML.load(File.read(file))
-      puts "using #{config['domain']}"
+      puts ""
+      puts "--> Starting interactive API console for #{config['domain']} - #{file}"
+      puts ""
       VersacommerceAPI::Base.site = site_from_config(config)
       
       require 'irb'
@@ -133,7 +135,7 @@ module VersacommerceAPI
       password = config['password']
       domain   = config['domain']
     
-      VersacommerceAPI::Base.site = "#{protocol}://#{api_key}:#{password}@#{domain}/admin"
+      VersacommerceAPI::Base.site = "#{protocol}://#{api_key}:#{password}@#{domain}/api"
     end
     
     def available_connections
@@ -155,8 +157,8 @@ module VersacommerceAPI
       default_connection == connection
     end
     
-    def no_config_file_error(filename)
-      raise ConfigFileError, "There is no config file at #{filename}"
+    def config_file_not_found_error(filename)
+      raise ConfigFileError, "Could not find config file at #{filename}"
     end
   end
 end
