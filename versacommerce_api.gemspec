@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = VersacommerceAPI::VERSION
   spec.author        = ["VersaCommerce"]
 
-  s.summary          = %q{The VersaCommerce API gem is a lightweight gem for accessing the VersaCommerce admin REST web services}
-  s.description      = %q{The VersaCommerce API gem allows Ruby developers to programmatically access the admin section of VersaCommerce shops. The API is implemented as JSON or XML over HTTP using all four verbs (GET/POST/PUT/DELETE). Each resource, like Order, Product, or Collection, has its own URL and is manipulated in isolation.}
+  spec.summary          = %q{The VersaCommerce API gem is a lightweight gem for accessing the VersaCommerce admin REST web services}
+  spec.description      = %q{The VersaCommerce API gem allows Ruby developers to programmatically access the admin section of VersaCommerce shops. The API is implemented as JSON or XML over HTTP using all four verbs (GET/POST/PUT/DELETE). Each resource, like Order, Product, or Collection, has its own URL and is manipulated in isolation.}
   spec.homepage      = "http://www.versacommerce.de"
   spec.license       = "MIT"
 
@@ -20,15 +20,16 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
+  spec.add_development_dependency "rspec"  
 
-  s.add_dependency("activeresource", [">= 3.0.0"])
-  s.add_dependency("thor", [">= 0.14.4"])
+  spec.add_dependency("activeresource", [">= 3.0.0"])
+  spec.add_dependency("thor", [">= 0.14.4"])
 
-  if s.respond_to?(:add_development_dependency)
-    s.add_development_dependency("mocha", ">= 0.9.8")
-    s.add_development_dependency("fakeweb")
+  if spec.respond_to?(:add_development_dependency)
+    spec.add_development_dependency("mocha", ">= 0.9.8")
+    spec.add_development_dependency("fakeweb")
   else
-    s.add_dependency("mocha", ">= 0.9.8")
-    s.add_dependency("fakeweb")
+    spec.add_dependency("mocha", ">= 0.9.8")
+    spec.add_dependency("fakeweb")
   end
 end
