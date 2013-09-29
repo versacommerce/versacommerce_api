@@ -10,6 +10,21 @@ describe VersacommerceAPI::Product do
   describe 'CRUD Operations' do
 
     describe 'Create' do
+      context 'new product' do
+        context 'when invalid' do
+          it 'should contains error messages' do
+            new_product = klass.create(:title => 'New-Api-product')
+            expect { new_product.errors.messages[:base].present? }.to be_true
+          end
+        end
+
+        context 'when valid' do
+          it 'should save the product' do
+            new_product = klass.new(:title => 'New-Api-product', :code=>"1x Api Product")
+            expect { new_product.save! }.to be_true
+          end
+        end
+      end
     end
 
     describe "Retrive" do
