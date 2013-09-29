@@ -30,7 +30,7 @@ describe VersacommerceAPI::Product do
     describe "Retrive" do
       context "when product not found" do
         it 'should raise error' do
-          expect {klass.find(23456789) }.to raise_error
+          expect { klass.find(23456789) }.to raise_error
         end
       end
 
@@ -43,10 +43,24 @@ describe VersacommerceAPI::Product do
     end
 
     describe 'Update' do
+
     end
 
     describe 'Delete' do
+      before(:all) { @product = VersacommerceAPI::Product.last }
+
+      context 'when product exist' do
+        it 'should delete the specified product' do
+          response = @product.destroy
+          response.code.should eql '200'
+        end
+      end
+
+      context 'when product does not exist' do
+        it 'should raise errors' do
+          expect { klass.find(@product.id) }.to raise_error
+        end
+      end
     end
   end
-
 end
