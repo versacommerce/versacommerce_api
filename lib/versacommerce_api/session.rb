@@ -9,10 +9,6 @@ module VersacommerceAPI
     attr_accessor :url, :token, :name
     
 
-    def self.setup(params)
-      params.each { |k,value| send("#{k}=", value) }
-    end
-
     def initialize(url, token = nil, params = nil)
       self.url, self.token = url, token
       
@@ -25,19 +21,39 @@ module VersacommerceAPI
       self.class.prepare_url(self.url)
     end
     
+
+    def self.setup(params)
+      params.each { |k,value| send("#{k}=", value) }
+    end
+
+
+    def self.request_token(domain)
+      return nil if domain.blank? || api_key.blank?
+      begin
+        content = open("http://#{domain}/api/auth.xml?api_key=#{api_key}") { |io| data = io.read }
+        Hash.from_xml(content)["token"] if content
+      rescue
+        nil
+      end
+    end
+
+
     def shop
       Shop.current
     end
     
+
     def create_permission_url
       return nil if url.blank? || api_key.blank?
       "http://#{url}/api/auth?api_key=#{api_key}"
     end
 
+
     # Used by ActiveResource::Base to make all non-authentication API calls
     def site
       "#{protocol}://#{api_key}:#{computed_password}@#{url}/api/"
     end
+    
 
     def valid?
       url.present? && token.present?
