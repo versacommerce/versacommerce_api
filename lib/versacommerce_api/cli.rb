@@ -96,7 +96,7 @@ module VersacommerceAPI
       file = config_file(connection)
       
       config = YAML.load(File.read(file))
-      puts "using #{config['domain']}"
+      puts "using #{config['domain']} - #{file}"
       VersacommerceAPI::Base.site = site_from_config(config)
       
       require 'irb'
