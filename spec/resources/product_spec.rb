@@ -3,7 +3,7 @@ require 'spec_helper'
 describe VersacommerceAPI::Product do
   let!(:klass) { VersacommerceAPI::Product }
 
-  before do
+  before(:all) do
     initialize_session
   end
 
