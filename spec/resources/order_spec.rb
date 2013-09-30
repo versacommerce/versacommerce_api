@@ -25,12 +25,15 @@ describe VersacommerceAPI::Order do
 
     describe 'Retrive' do
       context 'when order does not exist' do
-        it 'should raise error' do
+        it 'should raise resource not found error' do
+          expect { klass.find(23456789) }.to raise_error(ActiveResource::ResourceNotFound)
         end
       end
 
       context 'when order exist' do
         it 'should return the order' do
+          orders = klass.find(:all, :params => {:limit => 2})
+          orders.count.should eql 2
         end
       end
     end

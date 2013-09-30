@@ -29,8 +29,8 @@ describe VersacommerceAPI::Product do
 
     describe "Retrive" do
       context "when product not found" do
-        it 'should raise error' do
-          expect { klass.find(23456789) }.to raise_error
+        it 'should raise resource not found error' do
+          expect { klass.find(23456789) }.to raise_error(ActiveResource::ResourceNotFound)
         end
       end
 
@@ -64,8 +64,8 @@ describe VersacommerceAPI::Product do
       end
 
       context 'when product does not exist' do
-        it 'should raise errors' do
-          expect { klass.find(@product.id) }.to raise_error
+        it 'should raise resource not found errors' do
+          expect { klass.find(23456789) }.to raise_error(ActiveResource::ResourceNotFound)
         end
       end
     end
