@@ -21,7 +21,7 @@ describe VersacommerceAPI::Product do
         context 'when valid' do
           it 'should save the product' do
             new_product = klass.new(:title => 'New-Api-product', :code=>"1x Api Product")
-            expect { new_product.save! }.to be_true
+            new_product.save.should be_true
           end
         end
       end
@@ -43,7 +43,14 @@ describe VersacommerceAPI::Product do
     end
 
     describe 'Update' do
-
+      context 'for an existing product' do
+        it 'should update the given product attributes' do
+         product = klass.where(code: "1x Api Product").first
+         product.code = '2x Api Product'
+         product.save!
+         expect { klass.find(product.id).code }.should eql '2x Api Product'
+        end
+      end
     end
 
     describe 'Delete' do
