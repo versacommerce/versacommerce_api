@@ -42,6 +42,9 @@ describe VersacommerceAPI::Order do
     describe 'Update' do
       context 'for existing order' do
         it 'should update the attributes of the order' do
+          order = klass.last
+          order.update_attribute(:bank_account_name, 'German Bank')
+          klass.find(order.id).bank_account_name.should eql 'German Bank'
         end
       end
     end
