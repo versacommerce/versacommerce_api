@@ -13,12 +13,13 @@ describe VersacommerceAPI::Order do
       context 'New Order' do
         context 'when order is valid' do
           it 'should place a new order' do
+            order = klass.new(customer_email: 'dummy@email.de', item_total: 20)
+            order.save.should be_true
           end
         end
 
         context 'when order is invalid' do
-          it 'should raise error' do
-          end
+          it 'should raise error'
         end
       end
     end
@@ -50,7 +51,6 @@ describe VersacommerceAPI::Order do
 
       context 'when order exist' do
         it 'should delete the order' do
-          binding.pry
           response = @order.destroy
           response.code.should eql '200'
         end
