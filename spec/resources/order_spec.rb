@@ -46,13 +46,20 @@ describe VersacommerceAPI::Order do
     end
 
     describe 'delete' do
-      context 'when order does not exist' do
-        it 'should raise error' do
-        end
-      end
+      before(:all) { @order = VersacommerceAPI::Order.last }
 
       context 'when order exist' do
         it 'should delete the order' do
+          binding.pry
+          response = @order.destroy
+          response.code.should eql '200'
+        end
+      end
+
+      context 'when order does not exist' do
+        it 'should raise error' do
+          response = @order.destroy
+          response.code.should eql '404'
         end
       end
     end
