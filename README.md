@@ -123,6 +123,32 @@ Sample, receive all products and prints them.
     c.option_01 = "test"
     c.save
 
+### Page
+
+    VersacommerceAPI::Page.find(:all).first
+
+    => {
+      "active"=>true,
+      "title"=>"AGB",
+      "content"=>"<p>This is some Text</p>",
+      "content_meta_description"=>"This is a special page.",
+      "content_meta_keywords"=>"kewords, supported",
+      "content_title_tag"=>"Search engine optimized title",
+      "custom_url"=>nil,
+      "custom_url_routing"=>"standard_url_is_canonical",
+      "format"=>"tinymce",
+      "handle"=>"this-is-a-special-page",
+      "id"=>9070,
+      "option_01"=>nil,
+      "option_02"=>nil,
+      "option_03"=>nil,
+      "properties_count"=>0,
+      "mall_id"=>nil,
+      "shop_id"=>1157,
+      "created_on"=>Mon, 10 Sep 2013,
+      "updated_on"=>Mon, 10 Sep 2013
+      }
+
 ## Contributing
 
 1. Fork it
