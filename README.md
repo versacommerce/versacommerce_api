@@ -39,18 +39,34 @@ For detailed information see: [Authentication](https://github.com/versacommerce/
 
     $ bin/versacommerce add YOUR-VERSACOMMERCE-DOMAIN (enter APP-Key and password)
     $ bin/versacommerce console
+    irb(main):001:0> VersacommerceAPI::Shop.current
 
 ## Sample code:
 
     require "rubygems"
     require "versacommerce_api"
 
+    # instantiate a session that is ready to make calls to the given shop.
     VersacommerceAPI::Session.setup(api_key: "API_KEY_FOR_APP", secret: "SHARED_SECRET_FOR_APP")
+    
+    # If your app is resistered with you shop, you can request the "registration-token" 
     token    = VersacommerceAPI::Session.request_token("api-test.versacommerce.de")
+    
+    # Instantiate a session that is ready to make calls to the given shop.
     session  = VersacommerceAPI::Session.new("shopdomain.versacommerce.de", "RECEIVED_TOKEN")
+    session.valid?  # returns true
+    
+    # Now you can activate the session and you’re set:
     VersacommerceAPI::Base.activate_session(session)
 
+    # Get data from that shop (returns ActiveResource instances):
+    shop = VersacommerceAPI::Shop.current
+    
+    # Get three products:
     products = VersacommerceAPI::Product.find(:all, :params => {:limit => 3})
+    
+    # Get some orders:
+    latest_orders = VersacommerceAPI::Order.find(:all)
     
 ### Product
 
