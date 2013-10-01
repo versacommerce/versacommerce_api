@@ -54,29 +54,63 @@ For detailed information see: [Authentication](https://github.com/versacommerce/
     
 ### Product
 
+
+Get product count:
+
     VersacommerceAPI::Product.count
     => 18
     
+Get product count including variants:
+
     VersacommerceAPI::Product.count("show_variants" => "true")
     => 21
 
-    VersacommerceAPI::Product.find(:all, :params => {:limit => 3})
+Find all products:
+
+    VersacommerceAPI::Product.find(:all, params: {limit: 3})
+
+Find all products and variants (nested objects):
+
+    VersacommerceAPI::Product.find(:all, params: {include: :variants})
+
+Find all products and variants (not nested):
+
+    VersacommerceAPI::Product.find(:all, params: {show_variants: true})
     
+Fetch a product and the nested variants:
+
+    VersacommerceAPI::Product.find(167357, params: {include: :variants})
+    
+Fetch a product and nested properties of that product:
+
+    VersacommerceAPI::Product.find(167357, params: {include: :variants})
+
+Fetch a product and the nested variants including properties of those products and variants:
+
+    VersacommerceAPI::Product.find(167357, params: {include: [:variants, :properties]})
+
+
 #### Receive products in batches
 
 You can receive max 250 records per request. The default limit is 150. If you need to handle more records, you should request them in batches. Use the query params "limit" and "offset" to batch through your results.
 
-    def fetch_products
+Sample, receive all products and prints them.
+
+      require "rubygems"
+      require "versacommerce_api"
+
       products       = []
-      products_count = VersaCommerceShopApi::Product.count()
+      products_count = VersacommerceAPI::Product.count("show_variants" => "true")
       num_batches    = (products_count.to_f / 200).ceil
       num_batches.times do |batch|
         puts  "Fetching products: Batch #{batch+1} of #{num_batches}"
-        products.concat VersacommerceAPI::Product.find(:all, :limit => 200, :offset => batch*200} )
+        products.concat VersacommerceAPI::Product.find(:all, params: {limit: 200, offset: batch*200, show_variants: true})
       end
-      products
-    end
-
+      
+      products.each do |product|
+        puts "product code : #{product.code}"
+        puts "product title: #{product.title}"
+      end
 
 ### Order
 
