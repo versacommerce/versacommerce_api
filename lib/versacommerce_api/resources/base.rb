@@ -7,7 +7,6 @@ module VersacommerceAPI
                                   "ActiveResource/#{ActiveResource::VERSION::STRING}",
                                   "Ruby/#{RUBY_VERSION}"].join(' ')
     
-    # VersaCommerceShopApi::Base.site = VersaCommerceShopApi::Session.new("sampleshopdomain.versacommerce.de", "788be714").site
     def self.all
       self.find(:all)
     end

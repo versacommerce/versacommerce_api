@@ -16,25 +16,67 @@ Or install it yourself as:
 
     $ gem install versacommerce_api
 
-## Usage
+## Introduction
 
-TODO: Write usage instructions here
+Every app needs to:
 
+1. Registered with VersaCommerce. You will receive an APP_KEY and a shared secret.
+2. Registered with a Shop. This will provide a token.
+
+You communicate with your shop using your APP_KEY and a generated password. The password is an MD5-Hash of your token and shared secret.
+
+
+For detailed information see: [Authentication](https://github.com/versacommerce/vc-api/blob/master/sections/authentication.md)
+
+
+## Registering your app with a shop.
+
+    $ open http://YOUR-VERSACOMMERCE-DOMAIN.versacommerce.de/api/auth?api_key=API_KEY
+
+## Interactive console
+
+    You need you API-KEY and generated password. (http://YOUR-VERSACOMMERCE-DOMAIN.versacommerce.de/admin/settings/apps)
+
+    $ bin/versacommerce add YOUR-VERSACOMMERCE-DOMAIN (enter APP-Key and password)
     $ bin/versacommerce console
 
-### SetUp the credentials:
+## Sample code:
+
+    require "rubygems"
+    require "versacommerce_api"
 
     VersacommerceAPI::Session.setup(api_key: "API_KEY_FOR_APP", secret: "SHARED_SECRET_FOR_APP")
-    session = VersacommerceAPI::Session.new("shopdomain.versacommerce.de", "RECEIVED_TOKEN")
+    token    = VersacommerceAPI::Session.request_token("api-test.versacommerce.de")
+    session  = VersacommerceAPI::Session.new("shopdomain.versacommerce.de", "RECEIVED_TOKEN")
     VersacommerceAPI::Base.activate_session(session)
 
-    optional:
-    
-    VersacommerceAPI::Session.new("shopdomain.versacommerce.de").create_permission_url
+    products = VersacommerceAPI::Product.find(:all, :params => {:limit => 3})
     
 ### Product
 
+    VersacommerceAPI::Product.count
+    => 18
+    
+    VersacommerceAPI::Product.count("show_variants" => "true")
+    => 21
+
     VersacommerceAPI::Product.find(:all, :params => {:limit => 3})
+    
+#### Receive products in batches
+
+You can receive max 250 records per request. The default limit is 150. If you need to handle more records, you should request them in batches. Use the query params "limit" and "offset" to batch through your results.
+
+    def fetch_products
+      products       = []
+      products_count = VersaCommerceShopApi::Product.count()
+      num_batches    = (products_count.to_f / 200).ceil
+      num_batches.times do |batch|
+        puts  "Fetching products: Batch #{batch+1} of #{num_batches}"
+        products.concat VersacommerceAPI::Product.find(:all, :limit => 200, :offset => batch*200} )
+      end
+      products
+    end
+
 
 ### Order
 
