@@ -1,6 +1,6 @@
 # VersacommerceAPI
 
-TODO: Write a gem description
+The VersaCommerce API gem allows Ruby developers to programmatically access the admin section of VersaCommerce shops. The API is implemented as JSON or XML over HTTP using all four verbs (GET/POST/PUT/DELETE). Each resource, like Order, Product, or Collection, has its own URL and is manipulated in isolation.
 
 ## Installation
 
@@ -105,6 +105,12 @@ Fetch a product and the nested variants including properties of those products a
 
     VersacommerceAPI::Product.find(167357, params: {include: [:variants, :properties]})
 
+*Reference:*
+
+* [Product](https://github.com/versacommerce/vc-api/blob/master/sections/product.md)
+* [ProductImage](https://github.com/versacommerce/vc-api/blob/master/sections/product_image.md)
+* [Variant](https://github.com/versacommerce/vc-api/blob/master/sections/variant.md)
+* [Property](https://github.com/versacommerce/vc-api/blob/master/sections/property.md)
 
 #### Receive products in batches
 
@@ -132,6 +138,16 @@ Sample, receive all products and prints them.
 
     VersacommerceAPI::Order.find(:all, :params => {:limit => 3})
     VersacommerceAPI::Customer.find(:all, :params => {:limit => 3, :include => :billing_address})
+
+*Reference:*
+
+* [Order](https://github.com/versacommerce/vc-api/blob/master/sections/order.md)
+* [Item](https://github.com/versacommerce/vc-api/blob/master/sections/item.md)
+* [Customer](https://github.com/37signals/bcx-api/blob/master/sections/custimer.md)
+* [BillingAddress](https://github.com/37signals/bcx-api/blob/master/sections/billing_address.md)
+* [ShippingAddress](https://github.com/versacommerce/vc-api/blob/master/sections/shipping_address.md)
+* [Shipment](https://github.com/versacommerce/vc-api/blob/master/sections/shipment.md)
+* [Payment](https://github.com/versacommerce/vc-api/blob/master/sections/payment.md)
 
 ### Customer
 
@@ -164,6 +180,10 @@ Sample, receive all products and prints them.
       "created_on"=>Mon, 10 Sep 2013,
       "updated_on"=>Mon, 10 Sep 2013
       }
+
+*Reference:*
+
+* [Page](https://github.com/versacommerce/vc-api/blob/master/sections/page.md)
 
 ## Contributing
 
