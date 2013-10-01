@@ -26,7 +26,7 @@ module VersacommerceAPI
         config['domain']   = ask("Domain? (leave blank for #{connection}.versacommerce.de)")
         config['domain']   = "#{connection}.versacommerce.de" if config['domain'].blank?
         config['domain']   = "#{config['domain']}.versacommerce.de" unless config['domain'].match(/[.:]/)
-        puts "\nopen http://#{config['domain']}/admin/api in your browser to get API credentials\n"
+        puts "\nopen http://#{config['domain']}/admin/settings/apps in your browser to get API credentials\n"
         config['api_key']  = ask("API key?")
         config['password'] = ask("Password?")
         create_file(file, config.to_yaml)
@@ -133,7 +133,7 @@ module VersacommerceAPI
       password = config['password']
       domain   = config['domain']
     
-      VersacommerceAPI::Base.site = "#{protocol}://#{api_key}:#{password}@#{domain}/admin"
+      VersacommerceAPI::Base.site = "#{protocol}://#{api_key}:#{password}@#{domain}/api"
     end
     
     def available_connections
