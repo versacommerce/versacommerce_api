@@ -143,8 +143,8 @@ Sample, receive all products and prints them.
 
 * [Order](https://github.com/versacommerce/vc-api/blob/master/sections/order.md)
 * [Item](https://github.com/versacommerce/vc-api/blob/master/sections/item.md)
-* [Customer](https://github.com/37signals/bcx-api/blob/master/sections/custimer.md)
-* [BillingAddress](https://github.com/37signals/bcx-api/blob/master/sections/billing_address.md)
+* [Customer](https://github.com/versacommerce/bcx-api/blob/master/sections/custimer.md)
+* [BillingAddress](https://github.com/versacommerce/bcx-api/blob/master/sections/billing_address.md)
 * [ShippingAddress](https://github.com/versacommerce/vc-api/blob/master/sections/shipping_address.md)
 * [Shipment](https://github.com/versacommerce/vc-api/blob/master/sections/shipment.md)
 * [Payment](https://github.com/versacommerce/vc-api/blob/master/sections/payment.md)
@@ -184,6 +184,12 @@ Sample, receive all products and prints them.
 *Reference:*
 
 * [Page](https://github.com/versacommerce/vc-api/blob/master/sections/page.md)
+
+## TODO
+
+* Add more resources
+* More documentation
+* More Specs
 
 ## Contributing
 
