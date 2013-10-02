@@ -137,7 +137,6 @@ Sample, receive all products and prints them.
 ### Order
 
     VersacommerceAPI::Order.find(:all, :params => {:limit => 3})
-    VersacommerceAPI::Customer.find(:all, :params => {:limit => 3, :include => :billing_address})
 
 *Reference:*
 
@@ -151,6 +150,7 @@ Sample, receive all products and prints them.
 
 ### Customer
 
+    VersacommerceAPI::Customer.find(:all, :params => {:limit => 3, :include => :billing_address})
     c = VersacommerceAPI::Customer.find(18451)
     c.option_01 = "test"
     c.save
