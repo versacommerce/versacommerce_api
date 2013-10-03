@@ -25,7 +25,11 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "pry"
   spec.add_development_dependency "pry-nav"
 
+<<<<<<< HEAD
   spec.add_dependency("activeresource", ">= 3.2.14")
+=======
+  spec.add_dependency("activeresource", "~> 3.2.14")
+>>>>>>> 14896020a14ac84df4a9646d0aff9843c5ca25a0
   spec.add_dependency("thor", [">= 0.14.4"])
 
   if spec.respond_to?(:add_development_dependency)

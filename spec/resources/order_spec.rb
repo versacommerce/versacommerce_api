@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 # -*- encoding : utf-8 -*-
+=======
+>>>>>>> 14896020a14ac84df4a9646d0aff9843c5ca25a0
 require 'spec_helper'
 
 describe VersacommerceAPI::Order do

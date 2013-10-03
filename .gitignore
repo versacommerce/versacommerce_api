@@ -2,7 +2,11 @@
 *.swp
 .bundle
 .DS_Store
+<<<<<<< HEAD
 .rvmrc
 /coverage
 Gemfile.lock
 scratchpad
+=======
+/scratchpads
+>>>>>>> 14896020a14ac84df4a9646d0aff9843c5ca25a0
