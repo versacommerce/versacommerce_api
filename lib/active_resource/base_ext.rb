@@ -1,6 +1,7 @@
+# -*- encoding : utf-8 -*-
 module ActiveResource
   class Base
-    # Backported from ActiveResource master branch
+    # BACKPORTED FROM ACTIVERESOURCE MASTER BRANCH
     def self.headers
       @headers ||= {}
 

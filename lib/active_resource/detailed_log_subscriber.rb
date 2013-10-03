@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module ActiveResource
   class DetailedLogSubscriber < ActiveSupport::LogSubscriber
     def request(event)

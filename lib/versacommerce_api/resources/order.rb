@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module VersacommerceAPI
 
   # An order comes by default with three associations: shipping_address, billing_address and customer.

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module VersacommerceAPI
 
   # Shop object. Use Shop.current to receive the shop.
