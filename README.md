@@ -25,8 +25,13 @@ Every app needs to:
 
 You communicate with your shop using your APP_KEY and a generated password. The password is an MD5-Hash of your token and shared secret.
 
-
 For detailed information see: [Authentication](https://github.com/versacommerce/vc-api/blob/master/sections/authentication.md)
+
+## Registering your app with VersaCommerce
+
+1. SignUp as an developer: http://app.versacommerce.de/developer/signup
+2. Login to your developer account: http://app.versacommerce.de/developer
+3. Register your app.
 
 
 ## Registering your app with a shop.
