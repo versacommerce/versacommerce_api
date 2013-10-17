@@ -3,7 +3,7 @@ module VersacommerceAPI
   
   class ProductImage < Base
     
-    def initialize(attributes)
+    def initialize(attributes, persisted = false)
       super
       if self.attributes['file']
         file     = self.attributes['file']
