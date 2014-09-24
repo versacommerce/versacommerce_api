@@ -1,3 +1,4 @@
+1.0.9 - Added PaymentMethod resource
 1.0.8 - Added Carrier resource
 1.0.7 - Fixed YAML load bug
 1.0.6 - Added Account resource
