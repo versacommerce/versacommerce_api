@@ -6,18 +6,22 @@ module VersacommerceAPI
   # VersaCommerceShopApi::Order.find(:all, :params => {:include => 'items', :limit => 10})
   class Order < Base
     include Associatable
-    
+
+    def items
+      associated_resource "items"
+    end
+
     def payments
       associated_resource "payment"
     end
-    
+
     def shipping_address
       associated_resource "shipping_address", false
     end
-    
+
     def billing_address
       associated_resource "billing_address", false
     end
   end
-  
+
 end
