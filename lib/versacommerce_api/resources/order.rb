@@ -15,6 +15,10 @@ module VersacommerceAPI
       associated_resource "payment"
     end
 
+    def shipments
+      associated_resource "shipments"
+    end
+
     def shipping_address
       associated_resource "shipping_address", false
     end
