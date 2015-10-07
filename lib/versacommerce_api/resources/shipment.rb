@@ -7,6 +7,10 @@ module VersacommerceAPI
     def order
       associated_resource "order", false
     end
+
+    def items
+      associated_resource "items"
+    end
   end
   
 end
