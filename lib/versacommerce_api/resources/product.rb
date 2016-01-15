@@ -65,6 +65,10 @@ module VersacommerceAPI
     def featured_image
       ProductImage.new(:src => featured_image_url)
     end
+
+    def self.categories
+      get(:categories)
+    end
   end
 
 end
