@@ -66,9 +66,13 @@ module VersacommerceAPI
       ProductImage.new(:src => featured_image_url)
     end
 
-    def tax_for_country country
+    def tax_for_country country = nil
       begin
-        get(:tax_for_country, country: country)
+        if country.present?
+          get(:tax_for_country, country: country)
+        else
+          get(:tax_for_country) # Retrieve tax for default shipping country
+        end
       rescue ActiveResource::ResourceNotFound
         return nil
       end
