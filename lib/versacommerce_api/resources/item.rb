@@ -2,14 +2,8 @@
 module VersacommerceAPI
 
   class Item < Base
-    include Associatable
-
-    def product
-      associated_resource "product"
-    end
-
-    def order
-      associated_resource "order"
+    def self.root!
+      self.prefix = "/api/"
     end
   end
   
