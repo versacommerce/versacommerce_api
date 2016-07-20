@@ -19,5 +19,6 @@ end
 require "versacommerce_api/associatable"
 require "versacommerce_api/version"
 require 'versacommerce_api/countable'
+require 'versacommerce_api/metafieldable'
 require 'versacommerce_api/resources'
 require 'versacommerce_api/session'

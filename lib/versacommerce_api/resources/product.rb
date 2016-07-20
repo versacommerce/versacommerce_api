@@ -3,6 +3,7 @@ module VersacommerceAPI
 
   class Product < Base
     include Associatable
+    include Metafieldable
 
     def initialize(attributes, persisted = false)
       super

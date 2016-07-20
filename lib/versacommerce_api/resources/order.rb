@@ -6,6 +6,7 @@ module VersacommerceAPI
   # VersaCommerceShopApi::Order.find(:all, :params => {:include => 'items', :limit => 10})
   class Order < Base
     include Associatable
+    include Metafieldable
 
     def items
       associated_resource "items"

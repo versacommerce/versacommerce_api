@@ -3,7 +3,8 @@ module VersacommerceAPI
 
   class Customer < Base
     include Associatable
-    
+    include Metafieldable
+
     def billing_address
       associated_resource "billing_address", false
     end
@@ -12,5 +13,5 @@ module VersacommerceAPI
       associated_resource "shipment_address", false
     end
   end
-  
+
 end
