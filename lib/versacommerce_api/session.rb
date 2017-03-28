@@ -5,23 +5,23 @@ module VersacommerceAPI
     cattr_accessor :api_key
     cattr_accessor :secret
     cattr_accessor :protocol
-    self.protocol = 'http'
+    self.protocol = 'https'
 
     attr_accessor :url, :token, :name
-    
+
 
     def initialize(url, token = nil, params = nil)
       self.url, self.token = url, token
-      
+
       if params && params[:signature]
         unless self.class.validate_signature(params) && params[:timestamp].to_i > 24.hours.ago.utc.to_i
-          raise "Invalid Signature: Possible malicious login" 
+          raise "Invalid Signature: Possible malicious login"
         end
       end
-      
+
       self.class.prepare_url(self.url)
     end
-    
+
 
     def self.setup(params)
       params.each { |k,value| send("#{k}=", value) }
@@ -42,7 +42,7 @@ module VersacommerceAPI
     def shop
       Shop.current
     end
-    
+
 
     def create_permission_url
       return nil if url.blank? || api_key.blank?
@@ -54,7 +54,7 @@ module VersacommerceAPI
     def site
       "#{protocol}://#{api_key}:#{computed_password}@#{url}/api/"
     end
-    
+
 
     def valid?
       url.present? && token.present?
@@ -62,22 +62,22 @@ module VersacommerceAPI
 
     private
 
-    # The secret is computed by taking the shared_secret which we got when 
-    # registring this third party application and concating the request_to it, 
+    # The secret is computed by taking the shared_secret which we got when
+    # registring this third party application and concating the request_to it,
     # and then calculating a MD5 hexdigest.
-    
+
     # secret = shared_key
     # token  was provided by registration
     def computed_password
       Digest::MD5.hexdigest(secret + token.to_s)
     end
-    
+
     def self.prepare_url(url)
       return nil if url.blank?
       url.gsub!(/https?:\/\//, '') # remove http:// or https://
       url.concat(".versacommerce.de") unless url.include?('.')  # extend url to versacommerce.de if no host is given
     end
-    
+
     def self.validate_signature(params)
       return false unless signature = params[:signature]
 
@@ -85,5 +85,5 @@ module VersacommerceAPI
       Digest::MD5.hexdigest(secret + sorted_params) == signature
     end
   end
-  
+
 end
