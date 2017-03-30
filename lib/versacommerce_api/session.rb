@@ -46,7 +46,7 @@ module VersacommerceAPI
 
     def create_permission_url
       return nil if url.blank? || api_key.blank?
-      "http://#{url}/api/auth?api_key=#{api_key}"
+      "https://#{url}/api/auth?api_key=#{api_key}"
     end
 
 
