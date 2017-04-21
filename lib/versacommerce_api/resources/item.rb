@@ -2,8 +2,8 @@
 module VersacommerceAPI
 
   class Item < Base
-    def product
-      Product.find product_id
+    def self.root!
+      self.prefix = "/api/"
     end
   end
   
