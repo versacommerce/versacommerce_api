@@ -31,7 +31,7 @@ module VersacommerceAPI
     def self.request_token(domain)
       return nil if domain.blank? || api_key.blank?
       begin
-        content = open("https://#{domain}/api/auth.xml?api_key=#{api_key}") { |io| data = io.read }
+        content = open("#{protocol}://#{domain}/api/auth.xml?api_key=#{api_key}") { |io| data = io.read }
         Hash.from_xml(content)["token"] if content
       rescue
         nil
@@ -46,7 +46,7 @@ module VersacommerceAPI
 
     def create_permission_url
       return nil if url.blank? || api_key.blank?
-      "https://#{url}/api/auth?api_key=#{api_key}"
+      "#{protocol}://#{url}/api/auth?api_key=#{api_key}"
     end
 
 
