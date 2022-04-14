@@ -29,7 +29,8 @@ module VersacommerceAPI
         config['domain']   = "#{config['domain']}.versacommerce.de" unless config['domain'].match(/[.:]/)
         puts "\nopen https://#{config['domain']}/admin/settings/apps in your browser to get API credentials\n"
         config['api_key']  = ask("API key :")
-        config['password'] = ask("Password:")
+        config['secret'] = ask("Secret:")
+        config['password'] = get_password(config['domain'], config['api_key'], config['secret'])
         create_file(file, config.to_yaml)
       end
       if available_connections.one?
@@ -160,6 +161,11 @@ module VersacommerceAPI
 
     def config_file_not_found_error(filename)
       raise ConfigFileError, "Could not find config file at #{filename}"
+    end
+
+    def get_password(domain, api_key, secret)
+      VersacommerceAPI::Session.setup(domain: domain, api_key: api_key, secret: secret)
+      VersacommerceAPI::Session.get_password
     end
   end
 end
