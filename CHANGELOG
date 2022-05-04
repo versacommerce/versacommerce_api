@@ -1,3 +1,5 @@
+2.0    - Remove active_resource overrides
+       - Ask user for secret and then get required token and password in VersasCommerce CLI
 1.0.20 - Allow to switch the API protocol
 1.0.19 - Remove debug statement
 1.0.18 - Add Event resource
